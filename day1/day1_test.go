@@ -7,7 +7,7 @@ import (
 )
 
 func TestGetTotalCaloriesOfTheElfCarryingMostCalories(t *testing.T) {
-	expected := 24001
+	expected := 24000
 	elvesItemsCalories := day1.ElvesItemsCalories{
 		day1.ElfInventory{
 			1000,
