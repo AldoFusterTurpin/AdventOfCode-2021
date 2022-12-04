@@ -9,13 +9,13 @@ import (
 
 func main() {
 	filePath := "day1/data/input.txt"
-	inputString := getStringFromFilePath(filePath)
+	inputString := getContentOfFile(filePath)
 
 	inventory := caloriecounting.GetInventoryFromInputString(inputString)
 	fmt.Println(inventory)
 }
 
-func getStringFromFilePath(filePath string) string {
+func getContentOfFile(filePath string) string {
 	s, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		fmt.Println(err)
