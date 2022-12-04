@@ -27,7 +27,7 @@ func TestGetTotalCaloriesOfTheElfCarryingMostCalories(t *testing.T) {
 	}
 }
 
-func TestReadInventoryString(t *testing.T) {
+func TestGetInventoryFromInputString(t *testing.T) {
 	type testData struct {
 		inputData string
 		expected  [][]int
