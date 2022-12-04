@@ -11,8 +11,9 @@ func main() {
 	filePath := "day1/data/input.txt"
 	inputString := getContentOfFile(filePath)
 
-	inventory := caloriecounting.GetInventoryFromInputString(inputString)
-	fmt.Println(inventory)
+	inventory := caloriecounting.GetAllElvesCalories(inputString)
+	result := caloriecounting.GetTotalCaloriesOfTheElfCarryingMostCalories(inventory)
+	fmt.Println(result)
 }
 
 func getContentOfFile(filePath string) string {

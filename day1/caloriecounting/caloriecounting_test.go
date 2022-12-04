@@ -9,7 +9,7 @@ import (
 
 func TestGetTotalCaloriesOfTheElfCarryingMostCalories(t *testing.T) {
 	expected := 24000
-	elvesItemsCalories := [][]int{
+	elvesCalories := [][]int{
 		[]int{
 			1000,
 			2000,
@@ -21,7 +21,7 @@ func TestGetTotalCaloriesOfTheElfCarryingMostCalories(t *testing.T) {
 		[]int{10000},
 	}
 
-	got := caloriecounting.GetTotalCaloriesOfTheElfCarryingMostCalories(elvesItemsCalories)
+	got := caloriecounting.GetTotalCaloriesOfTheElfCarryingMostCalories(elvesCalories)
 	if expected != got {
 		t.Fatalf("expected %v, but got %v", expected, got)
 	}
@@ -99,7 +99,7 @@ func TestGetInventoryFromInputString(t *testing.T) {
 
 	for name, tc := range tests {
 		t.Run(name, func(t *testing.T) {
-			got := caloriecounting.GetInventoryFromInputString(tc.inputData)
+			got := caloriecounting.GetAllElvesCalories(tc.inputData)
 			if !reflect.DeepEqual(tc.expected, got) {
 				t.Fatalf("expected %v, but got %v", tc.expected, got)
 			}
