@@ -7,6 +7,26 @@ import (
 	"github.com/AldoFusterTurpin/AdventOfCode-2022/day1/caloriecounting"
 )
 
+func TestGetTotalCaloriesOfTheTopNElvesCarryingTheMostCalories(t *testing.T) {
+	expected := 45000
+	elvesCalories := [][]int{
+		[]int{
+			1000,
+			2000,
+			3000,
+		},
+		[]int{4000},
+		[]int{5000, 6000},
+		[]int{7000, 8000, 9000},
+		[]int{10000},
+	}
+
+	got := caloriecounting.GetTotalCaloriesOfTheTopNElvesCarryingTheMostCalories(elvesCalories, 3)
+	if expected != got {
+		t.Fatalf("expected %v, but got %v", expected, got)
+	}
+}
+
 func TestGetTotalCaloriesOfTheElfCarryingMostCalories(t *testing.T) {
 	expected := 24000
 	elvesCalories := [][]int{

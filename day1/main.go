@@ -12,7 +12,13 @@ func main() {
 	inputString := getContentOfFile(filePath)
 
 	inventory := caloriecounting.GetAllElvesCalories(inputString)
-	result := caloriecounting.GetTotalCaloriesOfTheElfCarryingMostCalories(inventory)
+
+	// used in part 1
+	// result := caloriecounting.GetTotalCaloriesOfTheElfCarryingMostCalories(inventory)
+
+	//used in part 2
+	result := caloriecounting.GetTotalCaloriesOfTheTopNElvesCarryingTheMostCalories(inventory, 3)
+
 	fmt.Println(result)
 }
 

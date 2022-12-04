@@ -3,14 +3,37 @@ package caloriecounting
 import (
 	"fmt"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 )
 
+// used in part 2
+func GetTotalCaloriesOfTheTopNElvesCarryingTheMostCalories(elvesCalories [][]int, n int) int {
+	sumOfCaloriesOfEachElf := getSumOfCaloriesOfEachElf(elvesCalories)
+
+	sort.Slice(sumOfCaloriesOfEachElf, func(i, j int) bool {
+		return sumOfCaloriesOfEachElf[i] > sumOfCaloriesOfEachElf[j]
+	})
+
+	return getSumOfCalories(sumOfCaloriesOfEachElf[0:n])
+}
+
+func getSumOfCaloriesOfEachElf(elvesCalories [][]int) []int {
+	sumOfCaloriesOfEachElf := make([]int, 0, len(elvesCalories))
+
+	for _, elfCalories := range elvesCalories {
+		sum := getSumOfCalories(elfCalories)
+		sumOfCaloriesOfEachElf = append(sumOfCaloriesOfEachElf, sum)
+	}
+	return sumOfCaloriesOfEachElf
+}
+
+// used in part 1
 func GetTotalCaloriesOfTheElfCarryingMostCalories(elvesCalories [][]int) int {
 	maxSumCalories := 0
 	for _, elfCalories := range elvesCalories {
-		sum := getSumOfCaloriesOfElf(elfCalories)
+		sum := getSumOfCalories(elfCalories)
 		if sum > maxSumCalories {
 			maxSumCalories = sum
 		}
@@ -19,9 +42,9 @@ func GetTotalCaloriesOfTheElfCarryingMostCalories(elvesCalories [][]int) int {
 	return maxSumCalories
 }
 
-func getSumOfCaloriesOfElf(elfCalories []int) int {
+func getSumOfCalories(calories []int) int {
 	sumCalories := 0
-	for _, calories := range elfCalories {
+	for _, calories := range calories {
 		sumCalories += calories
 	}
 	return sumCalories
