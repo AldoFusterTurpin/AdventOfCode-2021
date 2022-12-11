@@ -15,10 +15,22 @@ func TestGetScoreRound(t *testing.T) {
 	}
 
 	tests := map[string]testData{
-		"example": {
+		"example_1": {
 			opponentsChoice:    'A',
 			yourChoice:         'Y',
 			expectedRoundScore: 8,
+			expectedError:      nil,
+		},
+		"example_2": {
+			opponentsChoice:    'B',
+			yourChoice:         'X',
+			expectedRoundScore: 1,
+			expectedError:      nil,
+		},
+		"example_3": {
+			opponentsChoice:    'C',
+			yourChoice:         'Z',
+			expectedRoundScore: 6,
 			expectedError:      nil,
 		},
 	}
