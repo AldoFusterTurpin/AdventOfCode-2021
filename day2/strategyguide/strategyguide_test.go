@@ -54,27 +54,29 @@ func TestGetTotalScore(t *testing.T) {
 	type testData struct {
 		scoreRounds        []int
 		expectedTotalScore int
-		expectedError      error
 	}
 
 	tests := map[string]testData{
 		"example_1": {
 			scoreRounds:        []int{1, 1, 1, 2},
 			expectedTotalScore: 5,
-			expectedError:      nil,
+		},
+		"empty_array": {
+			scoreRounds:        []int{},
+			expectedTotalScore: 0,
+		},
+		"example_from_statement": {
+			scoreRounds:        []int{8, 1, 6},
+			expectedTotalScore: 15,
 		},
 	}
 
 	for name, tc := range tests {
 		t.Run(name, func(t *testing.T) {
-			gotTotalScore, gotError := strategyguide.GetTotalScore(tc.scoreRounds)
+			gotTotalScore := strategyguide.GetTotalScore(tc.scoreRounds)
 
 			if tc.expectedTotalScore != gotTotalScore {
 				t.Fatalf("expected %v, but got %v", tc.expectedTotalScore, gotTotalScore)
-			}
-
-			if tc.expectedError != gotError {
-				t.Fatalf("expected %v, but got %v", tc.expectedTotalScore, gotError)
 			}
 		})
 	}
