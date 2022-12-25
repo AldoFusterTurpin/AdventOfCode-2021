@@ -1,6 +1,9 @@
 package strategyguide
 
-import "errors"
+import (
+	"errors"
+	"strings"
+)
 
 // Opponent is going to play:
 // A for Rock,
@@ -33,6 +36,32 @@ const (
 	Draw                = 1
 	YouWon              = 2
 )
+
+func ApplyStrategyGuide(input string) (int, error) {
+	input = strings.TrimSpace(input)
+	lines := strings.Split(input, "\n")
+	nRounds := len(lines)
+	scoreRounds := make([]int, nRounds)
+
+	for i, l := range lines {
+		parts := strings.Split(l, " ")
+
+		opponentsChoiceStr := parts[0] // a string with just one character, but still a string, needs the conversion below
+		opponentsChoiceRune := rune(opponentsChoiceStr[0])
+
+		yourChoiceStr := parts[1] // a string with just one character, but still a string, needs the conversion below
+		yourChoiceRune := rune(yourChoiceStr[0])
+
+		scoreRound, err := GetScoreRound(opponentsChoiceRune, yourChoiceRune)
+		if err != nil {
+			return 0, err
+		}
+		scoreRounds[i] = scoreRound
+	}
+
+	totalScore := GetTotalScore(scoreRounds)
+	return totalScore, nil
+}
 
 func GetTotalScore(scoreRounds []int) int {
 	sum := 0
