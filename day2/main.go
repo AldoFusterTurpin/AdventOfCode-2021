@@ -12,7 +12,11 @@ func main() {
 	filePath := "day2/data/input.txt"
 	inputString := getContentOfFile(filePath)
 
-	totalScore, err := strategyguide.ApplyStrategyGuide(inputString)
+	// Line below is used for Part 1
+	// totalScore, err := strategyguide.ApplyStrategyGuide(inputString)
+
+	// Line below is used for Part 2
+	totalScore, err := strategyguide.ApplyStrategyGuidePart2(inputString)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)

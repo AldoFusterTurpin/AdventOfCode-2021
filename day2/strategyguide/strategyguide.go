@@ -43,24 +43,34 @@ func ApplyStrategyGuide(input string) (int, error) {
 	nRounds := len(lines)
 	scoreRounds := make([]int, nRounds)
 
-	for i, l := range lines {
-		parts := strings.Split(l, " ")
-
-		opponentsChoiceStr := parts[0] // a string with just one character, but still a string, needs the conversion below
-		opponentsChoiceRune := rune(opponentsChoiceStr[0])
-
-		yourChoiceStr := parts[1] // a string with just one character, but still a string, needs the conversion below
-		yourChoiceRune := rune(yourChoiceStr[0])
-
-		scoreRound, err := GetScoreRound(opponentsChoiceRune, yourChoiceRune)
+	for i, line := range lines {
+		var err error
+		scoreRounds, err = treatLine(line, scoreRounds, i)
 		if err != nil {
 			return 0, err
 		}
-		scoreRounds[i] = scoreRound
 	}
 
 	totalScore := GetTotalScore(scoreRounds)
 	return totalScore, nil
+}
+
+func treatLine(line string, scoreRounds []int, index int) ([]int, error) {
+	parts := strings.Split(line, " ")
+
+	// a string with just one character, but still a string, needs the conversion below
+	opponentsChoiceStr := parts[0]
+	opponentsChoiceRune := rune(opponentsChoiceStr[0])
+
+	yourChoiceStr := parts[1]
+	yourChoiceRune := rune(yourChoiceStr[0])
+
+	scoreRound, err := GetScoreRound(opponentsChoiceRune, yourChoiceRune)
+	if err != nil {
+		return nil, err
+	}
+	scoreRounds[index] = scoreRound
+	return scoreRounds, nil
 }
 
 func GetTotalScore(scoreRounds []int) int {

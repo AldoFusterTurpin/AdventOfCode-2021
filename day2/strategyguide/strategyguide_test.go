@@ -35,6 +35,35 @@ C Z`,
 	}
 }
 
+func TestApplyStrategyGuidePart2(t *testing.T) {
+	type testData struct {
+		input              string
+		expectedTotalScore int
+	}
+
+	tests := map[string]testData{
+		"example_1": {
+			input: `A Y
+B X
+C Z`,
+			expectedTotalScore: 12,
+		},
+	}
+
+	for name, tc := range tests {
+		t.Run(name, func(t *testing.T) {
+			got, err := strategyguide.ApplyStrategyGuidePart2(tc.input)
+			if err != nil {
+				t.Fatalf("expected no error, but got %v", err)
+			}
+
+			if tc.expectedTotalScore != got {
+				t.Fatalf("expected %v, but got %v", tc.expectedTotalScore, got)
+			}
+		})
+	}
+}
+
 func TestGetScoreRound(t *testing.T) {
 	type testData struct {
 		opponentsChoice    rune
