@@ -16,6 +16,7 @@ func GetSolution(rucksacks []string) (int, error) {
 		}
 		commonItems[i] = commonItem
 	}
+
 	return GetSumOfPrioritiesOfItems(commonItems)
 }
 

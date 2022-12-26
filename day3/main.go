@@ -14,7 +14,7 @@ func main() {
 	inputString := getContentOfFile(filePath)
 	splitted := strings.Split(inputString, "\n")
 
-	solution, err := rucksack.GetSolution(splitted)
+	solution, err := rucksack.GetSolutionPart2(splitted)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)

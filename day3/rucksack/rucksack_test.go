@@ -39,6 +39,40 @@ func TestGetSolution(t *testing.T) {
 		})
 	}
 }
+
+func TestGetSolutionPart2(t *testing.T) {
+	type testData struct {
+		rucksacks []string
+		expected  int
+	}
+
+	tests := map[string]testData{
+		"example_1": {
+			rucksacks: []string{
+				"vJrwpWtwJgWrhcsFMMfFFhFp",
+				"jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
+				"PmmdzqPrVvPwwTWBwg",
+				"wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
+				"ttgJtRGJQctTZtZT",
+				"CrZsJsPPZsGzwwsLwLmpwMDw",
+			},
+			expected: 70,
+		},
+	}
+
+	for name, tc := range tests {
+		t.Run(name, func(t *testing.T) {
+			got, err := rucksack.GetSolutionPart2(tc.rucksacks)
+			if err != nil {
+				t.Fatalf("expected no error, but got %v", err)
+			}
+
+			if tc.expected != got {
+				t.Fatalf("expected %v, but got %v", tc.expected, got)
+			}
+		})
+	}
+}
 func TestGetCommonItemInRucksack(t *testing.T) {
 	type testData struct {
 		compartmensItems string
