@@ -6,6 +6,39 @@ import (
 	"github.com/AldoFusterTurpin/AdventOfCode-2022/day3/rucksack"
 )
 
+func TestGetSolution(t *testing.T) {
+	type testData struct {
+		rucksacks []string
+		expected  int
+	}
+
+	tests := map[string]testData{
+		"example_1": {
+			rucksacks: []string{
+				"vJrwpWtwJgWrhcsFMMfFFhFp",
+				"jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
+				"PmmdzqPrVvPwwTWBwg",
+				"wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
+				"ttgJtRGJQctTZtZT",
+				"CrZsJsPPZsGzwwsLwLmpwMDw",
+			},
+			expected: 157,
+		},
+	}
+
+	for name, tc := range tests {
+		t.Run(name, func(t *testing.T) {
+			got, err := rucksack.GetSolution(tc.rucksacks)
+			if err != nil {
+				t.Fatalf("expected no error, but got %v", err)
+			}
+
+			if tc.expected != got {
+				t.Fatalf("expected %v, but got %v", tc.expected, got)
+			}
+		})
+	}
+}
 func TestGetCommonItemInRucksack(t *testing.T) {
 	type testData struct {
 		compartmensItems string
@@ -42,6 +75,33 @@ func TestGetCommonItemInRucksack(t *testing.T) {
 	for name, tc := range tests {
 		t.Run(name, func(t *testing.T) {
 			got, err := rucksack.GetCommonItemInRucksack(tc.compartmensItems)
+			if err != nil {
+				t.Fatalf("expected no error, but got %v", err)
+			}
+
+			if tc.expected != got {
+				t.Fatalf("expected %v, but got %v", tc.expected, got)
+			}
+		})
+	}
+}
+
+func TestGetSumOfPrioritiesOfItems(t *testing.T) {
+	type testData struct {
+		items    []rune
+		expected int
+	}
+
+	tests := map[string]testData{
+		"example_1": {
+			items:    []rune{'p', 'L', 'P', 'v', 't', 's'},
+			expected: 157,
+		},
+	}
+
+	for name, tc := range tests {
+		t.Run(name, func(t *testing.T) {
+			got, err := rucksack.GetSumOfPrioritiesOfItems(tc.items)
 			if err != nil {
 				t.Fatalf("expected no error, but got %v", err)
 			}
