@@ -11,7 +11,11 @@ func main() {
 	filePath := "day5/data/input.txt"
 	inputString := getContentOfFile(filePath)
 
-	result := supplystacks.SolveProblem(inputString)
+	// For part 1
+	// result := supplystacks.SolveProblem(inputString)
+
+	// For part 2
+	result := supplystacks.SolveProblemPart2(inputString)
 	fmt.Printf("\nSolution: %v\n", result)
 }
 

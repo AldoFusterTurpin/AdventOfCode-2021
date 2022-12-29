@@ -20,7 +20,7 @@ move 1 from 1 to 2`
 	expected := "CMZ"
 	got := supplystacks.SolveProblem(input)
 	if expected != got {
-		t.Fatalf("got %v, but expected %v", got, expected)
+		t.Fatalf("expected %v, but got %v", expected, got)
 	}
 }
 
@@ -543,6 +543,24 @@ move 1 from 3 to 7`
 	expected := "MQSHJMWNH"
 	got := supplystacks.SolveProblem(input)
 	if expected != got {
-		t.Fatalf("got %v, but expected %v", got, expected)
+		t.Fatalf("expected %v, but got %v", expected, got)
+	}
+}
+
+func TestSolveProblemPart2WithSimpleInput(t *testing.T) {
+	input := `    [D]    
+[N] [C]    
+[Z] [M] [P]
+	1   2   3 
+
+move 1 from 2 to 1
+move 3 from 1 to 3
+move 2 from 2 to 1
+move 1 from 1 to 2`
+
+	expected := "MCD"
+	got := supplystacks.SolveProblemPart2(input)
+	if expected != got {
+		t.Fatalf("expected %v, but got %v", expected, got)
 	}
 }

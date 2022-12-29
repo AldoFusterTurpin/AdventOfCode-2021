@@ -61,25 +61,26 @@ func performRearrangement(rearrangmentInstructions string, stacks [][]Crate) [][
 		// fmt.Println(lineSlice)
 
 		n, from, to := extractInfoFromLineSlice(lineSlice)
+
 		stacks = moveCrate(stacks, n, from-1, to-1)
 	}
 	return stacks
 }
 
-func extractInfoFromLineSlice(lineSplitted []string) (int, int, int) {
-	nStr := lineSplitted[0]
+func extractInfoFromLineSlice(lineSlice []string) (int, int, int) {
+	nStr := lineSlice[0]
 	n, err := strconv.Atoi(nStr)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fromStr := lineSplitted[1]
+	fromStr := lineSlice[1]
 	from, err := strconv.Atoi(fromStr)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	toStr := lineSplitted[2]
+	toStr := lineSlice[2]
 	to, err := strconv.Atoi(toStr)
 	if err != nil {
 		log.Fatal(err)
@@ -91,7 +92,7 @@ func extractInfoFromLineSlice(lineSplitted []string) (int, int, int) {
 // it returns the slice
 // [1, 9, 3]
 func splitLine(line string) []string {
-	fmt.Println(line)
+	// fmt.Println(line)
 	const sentinel = "-"
 	line = strings.ReplaceAll(line, "move ", "")
 	line = strings.ReplaceAll(line, " from ", sentinel)
@@ -165,7 +166,7 @@ func processCharacter(character rune, j int, stacks [][]Crate) {
 }
 
 func moveCrate(stacks [][]Crate, n, from, to int) [][]Crate {
-	fmt.Printf("Move n: %v, from: %v, to: %v\n", n, from, to)
+	// fmt.Printf("Move n: %v, from: %v, to: %v\n", n, from, to)
 
 	// fmt.Println("Before moving:")
 	// printStacks(stacks)
