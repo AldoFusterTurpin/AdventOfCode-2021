@@ -50,3 +50,53 @@ func TestDetectStartOfPacketMarker(t *testing.T) {
 	}
 
 }
+
+func TestDetectStartOfMessageMarker(t *testing.T) {
+	type TestData struct {
+		input          string
+		expectedResult int
+		expectedErr    error
+	}
+
+	tests := map[string]TestData{
+		"sample_input": TestData{
+			input:          "mjqjpqmgbljsphdztnvjfqwrcgsmlb",
+			expectedResult: 19,
+			expectedErr:    nil,
+		},
+		"sample_input_2": TestData{
+			input:          "bvwbjplbgvbhsrlpgdmjqwftvncz",
+			expectedResult: 23,
+			expectedErr:    nil,
+		},
+		"sample_input_3": TestData{
+			input:          "nppdvjthqldpwncqszvftbrmjlhg",
+			expectedResult: 23,
+			expectedErr:    nil,
+		},
+		"sample_input_4": TestData{
+			input:          "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg",
+			expectedResult: 29,
+			expectedErr:    nil,
+		},
+		"sample_input_5": TestData{
+			input:          "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw",
+			expectedResult: 26,
+			expectedErr:    nil,
+		},
+	}
+
+	for name, tc := range tests {
+		t.Run(name, func(t *testing.T) {
+			got, err := packet.DetectStartOfMessageMarker(tc.input)
+			if err != nil {
+				t.Fatalf("unexpected error: %v", err)
+			}
+
+			if got != tc.expectedResult {
+				t.Fatalf("expected %v, but got %v", tc.expectedResult, got)
+			}
+		})
+	}
+
+}

@@ -12,11 +12,15 @@ func main() {
 	filePath := "day6/data/input.txt"
 	inputString := getContentOfFile(filePath)
 
-	result, err := packet.DetectStartOfPacketMarker(inputString)
+	// For part 1
+	// result, err := packet.DetectStartOfPacketMarker(inputString)
+
+	// For part 2
+	result, err := packet.DetectStartOfMessageMarker(inputString)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("\nSolution: %v\n", result)
+	fmt.Printf("Solution: %v\n", result)
 }
 
 func getContentOfFile(filePath string) string {
