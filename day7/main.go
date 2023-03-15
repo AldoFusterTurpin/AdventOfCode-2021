@@ -11,7 +11,11 @@ func main() {
 	filePath := "day7/data/input.txt"
 	inputString := getContentOfFile(filePath)
 	maxSizePerDirectory := 100000
-	result := device.SolveProblem(inputString, maxSizePerDirectory)
+
+	// Part 1
+	// result := device.SolveProblem(inputString, maxSizePerDirectory)
+
+	result := device.SolveProblemPart2(inputString, maxSizePerDirectory)
 	fmt.Printf("Result: %v\n", result)
 }
 
