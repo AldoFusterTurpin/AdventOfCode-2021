@@ -22,11 +22,29 @@ type Dir struct {
 	Content []string
 }
 
+func getSmallestDirSizeWithAtLeastSize(minDirSizeToBeDeleted int, dirsInfo map[string]int) int {
+	sizeOfSmallestDir := 0
+	firstDirFound := false
+
+	for _, dirSize := range dirsInfo {
+		if dirSize >= minDirSizeToBeDeleted {
+			if !firstDirFound {
+				sizeOfSmallestDir = dirSize
+				firstDirFound = true
+			} else if dirSize < sizeOfSmallestDir {
+				sizeOfSmallestDir = dirSize
+			}
+		}
+	}
+
+	return sizeOfSmallestDir
+}
+
 // Part 1
 func SolveProblem(input string, maxSizePerDir int) int {
 	input = strings.TrimSpace(input)
 	sum := 0
-	sizeOfDirs := GetSizeOfDirs(input)
+	sizeOfDirs := GetDirsInfo(input)
 	for _, v := range sizeOfDirs {
 		if v <= maxSizePerDir {
 			sum += v
@@ -35,7 +53,7 @@ func SolveProblem(input string, maxSizePerDir int) int {
 	return sum
 }
 
-func GetSizeOfDirs(input string) map[string]int {
+func GetDirsInfo(input string) map[string]int {
 	dirsInfo, dirsStack := GetDirsInfoAndDirsStack(input)
 	TraverseStackAndUpdateDirsInfo(dirsInfo, dirsStack)
 	return dirsInfo

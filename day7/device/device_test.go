@@ -260,7 +260,7 @@ $ ls
 	}
 }
 
-func TestGetSizeOfDirs(t *testing.T) {
+func TestGetDirsInfo(t *testing.T) {
 	type TestData struct {
 		input          string
 		expectedResult map[string]int //key:name, value: size
@@ -347,7 +347,7 @@ $ ls
 
 	for name, tc := range tests {
 		t.Run(name, func(t *testing.T) {
-			got := device.GetSizeOfDirs(tc.input)
+			got := device.GetDirsInfo(tc.input)
 			if !reflect.DeepEqual(got, tc.expectedResult) {
 				t.Fatalf("expected %v, but got %v", tc.expectedResult, got)
 			}
@@ -437,6 +437,34 @@ $ ls
 	for name, tc := range tests {
 		t.Run(name, func(t *testing.T) {
 			got := device.SolveProblem(tc.input, tc.maxSizePerDir)
+			if got != tc.expectedResult {
+				t.Fatalf("expected %v, but got %v", tc.expectedResult, got)
+			}
+		})
+	}
+}
+
+func TestGetSizeOfSmallestDirectoryThatShouldBeRemovedToRunTheUpdate(t *testing.T) {
+	type TestData struct {
+		dirsInfo       map[string]int //key:name, value: size
+		expectedResult int
+	}
+
+	tests := map[string]TestData{
+		"sample_input": {
+			dirsInfo: map[string]int{
+				"/":     48381165,
+				"//a":   94853,
+				"//a/e": 584,
+				"//d":   24933642,
+			},
+			expectedResult: 24933642,
+		},
+	}
+
+	for name, tc := range tests {
+		t.Run(name, func(t *testing.T) {
+			got := device.GetSizeOfSmallestDirectoryThatShouldBeRemovedToRunTheUpdate(tc.dirsInfo)
 			if got != tc.expectedResult {
 				t.Fatalf("expected %v, but got %v", tc.expectedResult, got)
 			}
